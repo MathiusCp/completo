@@ -1,11 +1,12 @@
-APP_NAME=pgmoreno
+APP_NAME=mateous
 STACK_FILE=stack.yml
+STACK_NAME=ecuador
 
 build:
 	docker build -t $(APP_NAME):latest .
 
 deploy:
-	docker stack deploy --with-registry-auth -c $(STACK_FILE) $(APP_NAME)
+	docker stack deploy --with-registry-auth -c $(STACK_FILE) $(STACK_NAME)
 
 logs:
 	docker service logs -f $(APP_NAME)_$(APP_NAME)
