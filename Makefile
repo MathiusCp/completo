@@ -1,15 +1,11 @@
-APP_NAME=mateous
-STACK_FILE=stack.yml
-STACK_NAME=ecuador
-
 build:
-	docker build -t $(APP_NAME):latest .
+	docker build -t mateous:latest .
 
 deploy:
-	docker stack deploy --with-registry-auth -c $(STACK_FILE) $(STACK_NAME)
+	docker stack deploy --with-registry-auth -c stack.yml ecuador
 
 rm:
-	docker stack rm $(STACK_NAME)
+	docker stack rm ecuador
 
 ps:
 	docker service ls
