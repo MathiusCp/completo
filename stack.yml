@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   mateous:
-    image: mateousimg:latest
+    image: mateous:latest
     build: .
     deploy:
       replicas: 1
