@@ -8,11 +8,8 @@ build:
 deploy:
 	docker stack deploy --with-registry-auth -c $(STACK_FILE) $(STACK_NAME)
 
-logs:
-	docker service logs -f $(APP_NAME)_$(APP_NAME)
-
 rm:
-	docker stack rm $(APP_NAME)
+	docker stack rm $(STACK_NAME)
 
 ps:
 	docker service ls
