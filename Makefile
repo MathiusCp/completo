@@ -2,10 +2,10 @@ build:
 	docker build -t mateous:latest .
 
 deploy:
-	docker stack deploy --with-registry-auth -c stack.yml ecuador
+	docker stack deploy --with-registry-auth -c stack.yml mateous
 
 rm:
-	docker stack rm ecuador
+	docker stack rm mateous
 
 ps:
 	docker service ls
