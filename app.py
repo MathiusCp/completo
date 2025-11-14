@@ -11,4 +11,4 @@ def saludo(nombre):
     return f"<h2>Hola {nombre}, bienvenido a pgmoreno.byronrm.com</h2>"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=1234)

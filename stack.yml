@@ -17,7 +17,7 @@ services:
         - "traefik.http.routers.mateous-secure.tls=true"
         - "traefik.http.routers.mateous-secure.tls.certresolver=http"
         - "traefik.http.routers.mateous-secure.service=mateous"
-        - "traefik.http.services.mateous.loadbalancer.server.port=80"
+        - "traefik.http.services.mateous.loadbalancer.server.port=1234"
         - "traefik.docker.network=traefik-public"
     networks:
       - traefik-public
