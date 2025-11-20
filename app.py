@@ -1,20 +1,20 @@
-from flask import Flask, render_template_string
+from flask import Flask
 
 app = Flask(__name__)
 
-# --- Plantilla Premium ---
-html = """
+@app.route('/')
+def home():
+    return """
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{{ titulo }}</title>
+    <title>Página Premium</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <!-- Estilos -->
     <style>
         body {
             margin: 0;
@@ -102,13 +102,15 @@ html = """
 <body>
 
 <header>
-    <h1>{{ header_title }}</h1>
-    <p>{{ header_sub }}</p>
+    <h1>Página Premium</h1>
+    <p>Diseño moderno totalmente dentro del return</p>
 </header>
 
 <div class="section">
     <div class="card">
-        {{ contenido }}
+        <h2>Hola 👋</h2>
+        <p>Un servidor me trajo aquí… pero ahora sí da gusto quedarse 😎</p>
+        <a href="/" class="btn">Botón de prueba</a>
     </div>
 </div>
 
@@ -119,33 +121,6 @@ html = """
 </body>
 </html>
 """
-
-@app.route('/')
-def home():
-    return render_template_string(
-        html,
-        titulo="Inicio",
-        header_title="Bienvenido a mi Servidor ✨",
-        header_sub="Un lugar bonito, moderno y construido con Flask",
-        contenido="""
-            <h2>Hola 👋</h2>
-            <p>Un servidor me trajo aquí… pero ahora sí da gusto quedarse 😎</p>
-            <a href='/saludo/Byron' class='btn'>Probar saludo</a>
-        """
-    )
-
-@app.route('/saludo/<nombre>')
-def saludo(nombre):
-    return render_template_string(
-        html,
-        titulo="Saludo",
-        header_title=f"¡Hola {nombre}! 👋",
-        header_sub="Qué bueno verte por aquí",
-        contenido=f"""
-            <p>Bienvenido a <strong>pgmoreno.byronrm.com</strong></p>
-            <a href='/' class='btn'>Volver al inicio</a>
-        """
-    )
 
 
 if __name__ == '__main__':
