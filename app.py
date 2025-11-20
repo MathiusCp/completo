@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "<h1>Hola desde Flask con Traefik 🚀</h1>"
+    return "<h1>Un servidor me trajo aqui y ahora no puedo salir</h1>"
 
 @app.route('/saludo/<nombre>')
 def saludo(nombre):
