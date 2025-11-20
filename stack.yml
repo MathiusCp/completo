@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   mateous:
-    image: mateous:latest
+    image: ghcr.io/mathiuscp/completo:latest
     build: .
     deploy:
       replicas: 1

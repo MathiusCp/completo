@@ -90,4 +90,14 @@ jobs:
           echo "${{ secrets.GHCR_PATH}}" | docker login ghcr.io -u mathiuscp --password-stdin 
           docker pull ghcr.io/mathiuscp/completo:latest
           
+          echo "Deteniendo los servicios (stack)"
+          docker stack rm castillo || true
+
+          echo "Esperar 20 segundos..."
+          sleep 20
+
+          echo "Desplegando el stack o los servicios"
+          docker stack deploy --with-registry-auth -c stack.yml castillo
+
+          docker ps
       
