@@ -2,61 +2,151 @@ from flask import Flask, render_template_string
 
 app = Flask(__name__)
 
-# --- Plantilla base ---
-base_html = """
+# --- Plantilla Premium ---
+html = """
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>{{ titulo }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Estilos -->
     <style>
         body {
             margin: 0;
-            font-family: "Segoe UI", sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            font-family: "Poppins", sans-serif;
+            background: #0e0e0e;
             color: white;
-            text-align: center;
-            padding: 40px;
         }
+
+        header {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .section {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+            animation: fadeSection 1.2s ease-in-out;
+        }
+
+        @keyframes fadeSection {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .card {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(6px);
+            background: #1a1a1a;
             border-radius: 15px;
             padding: 30px;
-            max-width: 600px;
-            margin: auto;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
-        h1, h2 {
-            margin-top: 0;
-        }
-        a {
-            color: #ffe082;
-            text-decoration: none;
+
+        a.btn {
+            display:inline-block;
+            margin-top: 20px;
+            padding: 14px 26px;
+            background: #8f94fb;
+            color: white;
+            border-radius: 30px;
             font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
         }
-        a:hover {
-            text-decoration: underline;
+
+        a.btn:hover {
+            background: #4e54c8;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding: 20px;
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
         }
     </style>
 </head>
+
 <body>
+
+<header>
+    <h1>{{ header_title }}</h1>
+    <p>{{ header_sub }}</p>
+</header>
+
+<div class="section">
     <div class="card">
         {{ contenido }}
     </div>
+</div>
+
+<footer>
+    © 2025 pgmoreno.byronrm.com – powered by Flask ✨
+</footer>
+
 </body>
 </html>
 """
 
 @app.route('/')
 def home():
-    contenido = "<h1>Un servidor me trajo aquí 😱</h1><p>Y ahora no puedo salir... <br>Pero al menos la vista está bonita 🌈</p>"
-    return render_template_string(base_html, titulo="Inicio", contenido=contenido)
+    return render_template_string(
+        html,
+        titulo="Inicio",
+        header_title="Bienvenido a mi Servidor ✨",
+        header_sub="Un lugar bonito, moderno y construido con Flask",
+        contenido="""
+            <h2>Hola 👋</h2>
+            <p>Un servidor me trajo aquí… pero ahora sí da gusto quedarse 😎</p>
+            <a href='/saludo/Byron' class='btn'>Probar saludo</a>
+        """
+    )
 
 @app.route('/saludo/<nombre>')
 def saludo(nombre):
-    contenido = f"<h2>Hola {nombre} 👋</h2><p>Bienvenido a <strong>pgmoreno.byronrm.com</strong></p>"
-    return render_template_string(base_html, titulo="Saludo", contenido=contenido)
+    return render_template_string(
+        html,
+        titulo="Saludo",
+        header_title=f"¡Hola {nombre}! 👋",
+        header_sub="Qué bueno verte por aquí",
+        contenido=f"""
+            <p>Bienvenido a <strong>pgmoreno.byronrm.com</strong></p>
+            <a href='/' class='btn'>Volver al inicio</a>
+        """
+    )
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=1234)
